@@ -9,7 +9,7 @@ import {
 
 import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import app from "../Firebase/Firebase.config";
+import app from "../FireBase/firebase.config";
 
 export const Context = createContext("");
 
@@ -22,7 +22,37 @@ const AuthProvider = ({ children }) => {
     setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  const contextValue = {};
+contextValue
+const updateUserProfile = (name, photoUrl) => {
+  setLoader(true);
+  return updateProfile(auth.currentUser, {
+    displayName: name,
+    photoURL: photoUrl,
+  });
+};
+const signInUser = (email, password) => {
+  setLoader(true);
+  return signInWithEmailAndPassword(auth, email, password);
+};
+const signOutUser = () => {
+  return signOut(auth);
+};
+
+const contextValue = {
+  signUpUser,
+  signInUser,
+  user,
+  loader,
+  signOutUser,
+  updateUserProfile,
+};
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+    setLoader(false)
+  });
+  return () => unsubscribe();
+}, [auth]);
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
 
