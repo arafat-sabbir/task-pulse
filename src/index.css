@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+*{
+  font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.active{
+  background: transparent !important;
+  color: red !important;
+  font-weight: 700 !important;
+}
+
+ul > li :hover{
+  background: transparent !important;
+  animation-duration: 700ms !important;
+  color: red !important;
+  font-weight: 700 !important;
+  border-radius: 50px !important;
+}

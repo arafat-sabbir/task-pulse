@@ -1,14 +1,13 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import useAuth from "../Utils/Hooks/useAuth/useAuth";
+import useAuth from "../Utility/Hooks/UseAuth/useAuth";
 
 const MainLayout = () => {
-  const { user,signOutUser } = useAuth();
+  const { user, signOutUser } = useAuth();
   // Sign Out User
-  const signOut = ()=>{
-    signOutUser()
-    .then()
-    .catch()
-  }
+  const signOut = () => {
+    signOutUser().then().catch();
+  };
+  // Navigation Link
   const links = (
     <>
       <li>
@@ -20,7 +19,7 @@ const MainLayout = () => {
     </>
   );
   return (
-    <div>
+    <>
       <div className="drawer">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col  bg-base-300">
@@ -47,25 +46,36 @@ const MainLayout = () => {
                 </svg>
               </label>
             </div>
+            {/* Website Logo */}
             <img
               src="https://i.ibb.co/Syy2tpj/logo.png"
               className="w-[40px] h-[40px]"
               alt=""
             />
+            {/* Website Name */}
             <div className="flex-1 px-2 mx-2 lg:mx-0 font-bold text-2xl">
-              Task Vault
+              Task Pulse
             </div>
             <div className="flex-none hidden lg:block">
               <ul className="menu menu-horizontal font-semibold">
                 {/* Navbar menu content  */}
                 {links}
                 {user ? (
-                  
-                    <button onClick={signOut} className="border-b-4  bg-black text-white border-b-main rounded-none px-4 py-2 text-center ">Sign out</button>
-                  
+                  // Sign Out User Button
+                  <button
+                    onClick={signOut}
+                    className="border-b-4  bg-black text-white border-b-main rounded-none px-4 py-2 text-center "
+                  >
+                    Sign out
+                  </button>
                 ) : (
                   <li>
-                    <Link to={"/signIn"}> <button className="border-b-4 border-main hover:rounded-none">Sign In</button> </Link>
+                    <Link to={"/signIn"}>
+                      {" "}
+                      <button className="border-b-4 border-main hover:rounded-none">
+                        Sign In
+                      </button>{" "}
+                    </Link>
                   </li>
                 )}
               </ul>
@@ -86,7 +96,7 @@ const MainLayout = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
